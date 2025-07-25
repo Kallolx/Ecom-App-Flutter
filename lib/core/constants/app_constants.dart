@@ -9,12 +9,15 @@ class AppRoutes {
   static const String otpVerification = '/otp-verification';
   static const String changePassword = '/change-password';
   static const String home = '/home';
-  
+  static const String orders = '/orders';
+  static const String wishlist = '/wishlist';
+  static const String more = '/more'; 
 }
 
 class AssetPaths {
   static const String imagePath = 'assets/images/';
   static const String iconPath = 'assets/icons/';
+
 }
 
 class AppConstants {

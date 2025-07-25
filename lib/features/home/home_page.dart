@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import '../../core/widgets/custom_bottom_nav_bar.dart';
 import 'screens/home_tab.dart';
+import '../orders/screens/orders_screen.dart';
+import '../wishlist/screens/wishlist_screen.dart';
+import '../more/screens/more_screen.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,9 +18,9 @@ class _HomePageState extends State<HomePage> {
 
   final List<Widget> _pages = [
     const HomeTab(),
-    const Center(child: Text('My Orders Coming Soon')),
-    const Center(child: Text('Wishlist Coming Soon')),
-    const Center(child: Text('Profile Coming Soon')),
+    const OrdersScreen(),
+    const WishlistScreen(),
+    const MoreScreen(),
   ];
 
   void _onTabTapped(int index) {

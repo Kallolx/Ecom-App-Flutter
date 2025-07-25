@@ -14,6 +14,9 @@ import 'package:laza_ecom/features/onboarding/welcome_screen.dart';
 import 'package:laza_ecom/features/onboarding/onboarding_screen.dart';
 import 'package:laza_ecom/features/splash/splash_screen.dart';
 import 'package:laza_ecom/features/home/home_page.dart';
+import 'package:laza_ecom/features/orders/screens/orders_screen.dart';
+import 'package:laza_ecom/features/wishlist/screens/wishlist_screen.dart';
+import 'package:laza_ecom/features/more/screens/more_screen.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -62,6 +65,12 @@ class RouteGenerator {
       
       case AppRoutes.home:
         return MaterialPageRoute(builder: (_) => const HomePage());
+      case AppRoutes.orders:
+        return MaterialPageRoute(builder: (_) => const OrdersScreen());
+      case AppRoutes.wishlist:
+        return MaterialPageRoute(builder: (_) => const WishlistScreen());
+      case AppRoutes.more:
+        return MaterialPageRoute(builder: (_) => const MoreScreen());
       // Add other routes as needed
       default:
         // If there is no such named route in the switch statement

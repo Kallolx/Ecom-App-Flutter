@@ -52,9 +52,9 @@ class CustomBottomNavBar extends StatelessWidget {
                 onTap: () => onTap(2),
               ),
               _NavBarItem(
-                icon: Icons.person_outline,
-                selectedIcon: Icons.person,
-                label: 'Profile',
+                icon: Icons.settings_applications_outlined,
+                selectedIcon: Icons.settings_applications,
+                label: 'More',
                 isSelected: currentIndex == 3,
                 onTap: () => onTap(3),
               ),
@@ -74,7 +74,6 @@ class _NavBarItem extends StatelessWidget {
   final VoidCallback onTap;
 
   const _NavBarItem({
-    super.key,
     required this.icon,
     required this.selectedIcon,
     required this.label,
