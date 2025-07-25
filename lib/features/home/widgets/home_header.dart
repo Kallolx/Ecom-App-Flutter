@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../search/screens/search_screen.dart';
 
 class HomeHeader extends StatelessWidget {
   final String userName;
@@ -11,14 +12,14 @@ class HomeHeader extends StatelessWidget {
   final int cartItemCount;
 
   const HomeHeader({
-    Key? key,
+    super.key,
     required this.userName,
     required this.userImage,
     required this.subtitle,
     this.onSearchTap,
     this.onCartTap,
     this.cartItemCount = 0,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,11 @@ class HomeHeader extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 24,
-                backgroundImage: AssetImage(userImage),
+                backgroundImage: userImage.startsWith('http')
+                    ? NetworkImage(userImage)
+                    : userImage.isEmpty
+                        ? const AssetImage('assets/images/default_avatar.jpg')
+                        : AssetImage(userImage) as ImageProvider,
               ),
               const SizedBox(width: 12),
               Column(
@@ -60,7 +65,26 @@ class HomeHeader extends StatelessWidget {
           Row(
             children: [
               IconButton(
-                onPressed: onSearchTap,
+                onPressed: () {
+                  Navigator.of(context).push(
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) =>
+                          const SearchScreen(),
+                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                        const begin = Offset(0.0, 1.0);
+                        const end = Offset.zero;
+                        const curve = Curves.easeInOutCubic;
+                        var tween = Tween(begin: begin, end: end)
+                            .chain(CurveTween(curve: curve));
+                        return SlideTransition(
+                          position: animation.drive(tween),
+                          child: child,
+                        );
+                      },
+                      transitionDuration: const Duration(milliseconds: 300),
+                    ),
+                  );
+                },
                 icon: const Icon(Icons.search, size: 28),
               ),
               Stack(

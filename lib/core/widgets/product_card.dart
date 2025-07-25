@@ -14,7 +14,7 @@ class ProductCard extends StatelessWidget {
   final bool isFavorite;
 
   const ProductCard({
-    Key? key,
+    super.key,
     required this.imageUrl,
     required this.name,
     required this.price,
@@ -24,7 +24,7 @@ class ProductCard extends StatelessWidget {
     this.onFavorite,
     this.onAddToCart,
     this.isFavorite = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

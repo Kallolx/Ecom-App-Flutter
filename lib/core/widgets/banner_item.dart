@@ -11,14 +11,14 @@ class BannerItem extends StatelessWidget {
   final bool isDark;
 
   const BannerItem({
-    Key? key,
+    super.key,
     required this.imageUrl,
     this.title,
     this.subtitle,
     this.buttonText,
     this.onButtonPressed,
     this.isDark = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +54,7 @@ class BannerItem extends StatelessWidget {
                 style: GoogleFonts.poppins(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: isDark ? Colors.black : Colors.white,
+                  color: Colors.white,
                 ),
               ),
               const SizedBox(height: 8),
@@ -64,7 +64,7 @@ class BannerItem extends StatelessWidget {
                 subtitle!,
                 style: GoogleFonts.poppins(
                   fontSize: 14,
-                  color: isDark ? Colors.black.withOpacity(0.7) : Colors.white.withOpacity(0.7),
+                  color: Colors.white.withOpacity(0.7),
                 ),
               ),
               const SizedBox(height: 8),

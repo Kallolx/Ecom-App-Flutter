@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../widgets/category_card.dart';
 
 class CategoryTab extends StatelessWidget {
-  const CategoryTab({Key? key}) : super(key: key);
+  const CategoryTab({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,42 +11,42 @@ class CategoryTab extends StatelessWidget {
       {
         'name': 'T-Shirt',
         'count': '70',
-        'image': 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3'
+        'image': 'assets/category/1.png',
       },
       {
         'name': 'Pants',
         'count': '215',
-        'image': 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?ixlib=rb-4.0.3'
+        'image': 'assets/category/2.png',  
       },
       {
         'name': 'Bags',
         'count': '159',
-        'image': 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-4.0.3'
+        'image': 'assets/category/3.png'
       },
       {
         'name': 'Electronics',
         'count': '69',
-        'image': 'https://images.unsplash.com/photo-1498049794561-7780e7231661?ixlib=rb-4.0.3'
+        'image': 'assets/category/4.png'
       },
       {
         'name': 'Shoes',
         'count': '70',
-        'image': 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3'
+        'image': 'assets/category/5.png'
       },
       {
         'name': 'Watches',
         'count': '123',
-        'image': 'https://images.unsplash.com/photo-1524592094714-0f0654e20314?ixlib=rb-4.0.3'
+        'image': 'assets/category/4.png'
       },
       {
         'name': 'Jewelry',
         'count': '89',
-        'image': 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?ixlib=rb-4.0.3'
+        'image': 'assets/category/2.png'
       },
       {
         'name': 'Sunglasses',
         'count': '45',
-        'image': 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-4.0.3'
+        'image': 'assets/category/1.png'
       },
     ];
 

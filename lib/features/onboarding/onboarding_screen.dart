@@ -199,16 +199,10 @@ class OnboardingPage extends StatelessWidget {
               child: Container(
                 margin: const EdgeInsets.only(top: 0, left: 32, right: 32, bottom: 16),
                 width: MediaQuery.of(context).size.width * 0.85,
-                height: screenHeight * 0.45,
-                padding: const EdgeInsets.all(32),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFF5F6F8),
-                  borderRadius: BorderRadius.circular(32),
-                ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(24),
                   child: Image.asset(
-                    image ?? 'assets/images/onboarding_2.jpg',
+                    image ?? 'assets/images/onboarding_2.png',
                     fit: BoxFit.contain,
                     errorBuilder: (context, error, stackTrace) {
                       // Fallback if image fails to load
@@ -238,7 +232,7 @@ class OnboardingPage extends StatelessWidget {
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.only(top: 32, left: 24, right: 24),
+              padding: const EdgeInsets.only(top: 8, left: 24, right: 24), // Reduced top padding
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -248,6 +242,7 @@ class OnboardingPage extends StatelessWidget {
                           fontWeight: FontWeight.w900,
                           height: 1.2,
                           color: AppTheme.primaryColor,
+                          fontSize: 28, // Increased title size
                         ),
                     textAlign: TextAlign.center,
                   ),
@@ -257,7 +252,7 @@ class OnboardingPage extends StatelessWidget {
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: AppTheme.darkGrayColor,
                           height: 1.5,
-                          fontSize: 16,
+                          fontSize: 18, // Increased description size
                         ),
                     textAlign: TextAlign.center,
                   ),

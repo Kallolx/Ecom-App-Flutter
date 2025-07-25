@@ -7,10 +7,11 @@ import '../../../core/widgets/custom_banner_slider.dart';
 import '../../../core/widgets/product_card.dart';
 import '../widgets/home_header.dart';
 import '../widgets/section_header.dart';
+import '../widgets/flash_sale_section.dart';
 import 'category_tab.dart';
 
 class HomeTab extends StatefulWidget {
-  const HomeTab({Key? key}) : super(key: key);
+  const HomeTab({super.key});
 
   @override
   State<HomeTab> createState() => _HomeTabState();
@@ -22,15 +23,13 @@ class _HomeTabState extends State<HomeTab> with SingleTickerProviderStateMixin {
   bool isLoading = true;
   late TabController _tabController;
 
-  Future<void> fetchUser() async {
-    final response = await http.get(Uri.parse('https://dummyjson.com/users'));
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      setState(() {
-        user = (data['users'] as List).isNotEmpty ? data['users'][0] : null;
-      });
-    }
-  }
+  // List of local asset image paths for product cards
+  final List<String> productImages = [
+    'assets/products/prod1.jpg',
+    'assets/products/prod2.jpg',
+    'assets/products/prod3.jpg'
+  ];
+
 
   Future<void> fetchProducts() async {
     setState(() {
@@ -55,7 +54,6 @@ class _HomeTabState extends State<HomeTab> with SingleTickerProviderStateMixin {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
     fetchProducts();
-    fetchUser();
   }
 
   @override
@@ -72,8 +70,8 @@ class _HomeTabState extends State<HomeTab> with SingleTickerProviderStateMixin {
           children: [
             // Header with user info and cart
             HomeHeader(
-              userName: user != null ? user!['firstName'] ?? 'User' : 'User',
-              userImage: user != null ? user!['image'] ?? '' : '',
+              userName: 'User',
+              userImage: 'assets/images/user.png',
               subtitle: "let's go shopping",
               cartItemCount: 2,
             ),
@@ -138,6 +136,10 @@ class _HomeTabState extends State<HomeTab> with SingleTickerProviderStateMixin {
                 ),
               ),
             ),
+            const SizedBox(height: 16),
+            // Flash Sale Section
+            const FlashSaleSection(),
+            const SizedBox(height: 24),
             SectionHeader(
               title: 'Trending Now',
               onSeeAllPressed: () {},
@@ -154,13 +156,13 @@ class _HomeTabState extends State<HomeTab> with SingleTickerProviderStateMixin {
                   crossAxisSpacing: 16,
                   childAspectRatio: 0.62,
                 ),
-                itemCount: products.length,
+                itemCount: products.length > 8 ? 8 : products.length,
                 itemBuilder: (context, index) {
                   final p = products[index];
                   return Container(
                     margin: const EdgeInsets.all(4),
                     child: ProductCard(
-                      imageUrl: p['thumbnail'] ?? '',
+                      imageUrl: productImages[index % productImages.length],
                       name: p['title'] ?? '',
                       price: (p['price'] ?? 0).toDouble(),
                       info: p['description'] ?? '',
@@ -181,7 +183,7 @@ class _HomeTabState extends State<HomeTab> with SingleTickerProviderStateMixin {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(12),
                 child: BannerSlider(
-                  height: 200,
+                  height: 160,
                   items: [
                     BannerItem(
                       imageUrl: 'assets/images/banner2.jpg',
@@ -219,11 +221,11 @@ class _HomeTabState extends State<HomeTab> with SingleTickerProviderStateMixin {
                   crossAxisSpacing: 16,
                   childAspectRatio: 0.60,
                 ),
-                itemCount: products.length,
+                itemCount: products.length > 8 ? 8 : products.length,
                 itemBuilder: (context, index) {
                   final p = products[index];
                   return ProductCard(
-                    imageUrl: p['thumbnail'] ?? '',
+                    imageUrl: productImages[index % productImages.length],
                     name: p['title'] ?? '',
                     price: (p['price'] ?? 0).toDouble(),
                     info: p['description'] ?? '',

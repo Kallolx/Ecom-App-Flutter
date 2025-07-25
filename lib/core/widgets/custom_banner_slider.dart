@@ -11,14 +11,14 @@ class BannerSlider extends StatefulWidget {
   final bool showIndicator;
   
   const BannerSlider({
-    Key? key,
+    super.key,
     required this.items,
     this.height = 250, // Increased height for better content spacing
     this.autoPlay = true,
     this.autoPlayInterval = const Duration(seconds: 3),
     this.autoPlayAnimationDuration = const Duration(milliseconds: 800),
     this.showIndicator = true,
-  }) : super(key: key);
+  });
 
   @override
   State<BannerSlider> createState() => _BannerSliderState();

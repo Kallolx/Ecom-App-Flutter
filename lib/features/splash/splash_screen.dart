@@ -30,14 +30,12 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Logo text with the red color from the design
-            Text(
-              'laza',
-              style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                    color: AppTheme.primaryColor,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 48,
-                  ),
+            // Logo image in the center
+            Image.asset(
+              'assets/images/logo.png', // Replace with your actual logo path
+              width: 400,
+              height: 400,
+              fit: BoxFit.contain,
             ),
           ],
         ),
