@@ -12,6 +12,11 @@ class AppRoutes {
   static const String orders = '/orders';
   static const String wishlist = '/wishlist';
   static const String more = '/more'; 
+  static const String categoryDetail = '/category-detail';
+  static const String shopDetail = '/shop-detail';
+  static const String orderDetail = '/order-detail';
+  static const String orderTracking = '/order-tracking';
+  static const String cartScreen = '/cart-screen';
 }
 
 class AssetPaths {

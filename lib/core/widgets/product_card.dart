@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../features/home/screens/product_detail_screen.dart';
 
 
 class ProductCard extends StatelessWidget {
@@ -28,145 +29,162 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(14),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 6,
-            offset: const Offset(0, 4),
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (_) => ProductDetailScreen(
+              imageUrl: imageUrl,
+              name: name,
+              price: price,
+              info: info,
+              rating: rating,
+              reviewCount: reviewCount,
+              shopName: 'Watch Store', // You can pass real shop name if available
+            ),
           ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Image + top buttons
-          Stack(
-            children: [
-              ClipRRect(
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(14)),
-                child: AspectRatio(
-                  aspectRatio: 1.1,
-                  child: Image.asset(
-                    imageUrl,
-                    fit: BoxFit.cover,
+        );
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(14),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 6,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Image + top buttons
+            Stack(
+              children: [
+                ClipRRect(
+                  borderRadius: const BorderRadius.vertical(top: Radius.circular(14)),
+                  child: AspectRatio(
+                    aspectRatio: 1.1,
+                    child: Image.asset(
+                      imageUrl,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
-              ),
-              Positioned(
-                top: 8,
-                right: 8,
-                child: Column(
-                  children: [
-                    Container(
-                      width: 32,
-                      height: 32,
-                      decoration: BoxDecoration(
-                        color: Colors.grey[500],
-                        shape: BoxShape.circle,
-                      ),
-                      child: IconButton(
-                        icon: Icon(
-                          isFavorite ? Icons.favorite : Icons.favorite_border,
-                          color: Colors.white,
-                          size: 18,
-                        ),
-                        onPressed: onFavorite,
-                        iconSize: 18,
-                        padding: EdgeInsets.zero,
-                        constraints: BoxConstraints(),
-                      ),
-                    ),
-                    SizedBox(height: 8),
-                    Container(
-                      width: 32,
-                      height: 32,
-                      decoration: BoxDecoration(
-                        color: Colors.grey[500],
-                        shape: BoxShape.circle,
-                      ),
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.shopping_cart_outlined,
-                          color: Colors.white,
-                          size: 18,
-                        ),
-                        onPressed: onAddToCart,
-                        iconSize: 18,
-                        padding: EdgeInsets.zero,
-                        constraints: BoxConstraints(),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-
-          // Content
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    name,
-                    style: GoogleFonts.poppins(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(height: 2),
-                  Text(
-                    '\$$price',
-                    style: GoogleFonts.poppins(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.red,
-                    ),
-                  ),
-                  const SizedBox(height: 2),
-                  Text(
-                    info,
-                    style: GoogleFonts.poppins(
-                      fontSize: 11,
-                      color: Colors.grey,
-                    ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(height: 16),
-                  Row(
+                Positioned(
+                  top: 8,
+                  right: 8,
+                  child: Column(
                     children: [
-                      const Icon(Icons.star, color: Colors.amber, size: 14),
-                      const SizedBox(width: 3),
-                      Text(
-                        '$rating ',
-                        style: GoogleFonts.poppins(
-                          fontSize: 12,
-                          color: Colors.black87,
+                      Container(
+                        width: 36,
+                        height: 36,
+                        decoration: BoxDecoration(
+                          color: Colors.grey[500],
+                          shape: BoxShape.circle,
+                        ),
+                        child: IconButton(
+                          icon: Icon(
+                            isFavorite ? Icons.favorite : Icons.favorite_border,
+                            color: Colors.white,
+                            size: 18,
+                          ),
+                          onPressed: onFavorite,
+                          iconSize: 18,
+                          padding: EdgeInsets.zero,
+                          constraints: BoxConstraints(),
                         ),
                       ),
-                      Text(
-                        '(${reviewCount.toString()})',
-                        style: GoogleFonts.poppins(
-                          fontSize: 12,
-                          color: Colors.red,
+                      SizedBox(height: 8),
+                      Container(
+                        width: 36,
+                        height: 36,
+                        decoration: BoxDecoration(
+                          color: Colors.grey[500],
+                          shape: BoxShape.circle,
+                        ),
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.shopping_cart_outlined,
+                            color: Colors.white,
+                            size: 18,
+                          ),
+                          onPressed: onAddToCart,
+                          iconSize: 18,
+                          padding: EdgeInsets.zero,
+                          constraints: BoxConstraints(),
                         ),
                       ),
                     ],
                   ),
-                ],
+                ),
+              ],
+            ),
+
+            // Content
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      name,
+                      style: GoogleFonts.poppins(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      '\$$price',
+                      style: GoogleFonts.poppins(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.red,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      info,
+                      style: GoogleFonts.poppins(
+                        fontSize: 11,
+                        color: Colors.grey,
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 16),
+                    Row(
+                      children: [
+                        const Icon(Icons.star, color: Colors.amber, size: 14),
+                        const SizedBox(width: 3),
+                        Text(
+                          '$rating ',
+                          style: GoogleFonts.poppins(
+                            fontSize: 12,
+                            color: Colors.black87,
+                          ),
+                        ),
+                        Text(
+                          '(${reviewCount.toString()})',
+                          style: GoogleFonts.poppins(
+                            fontSize: 12,
+                            color: Colors.red,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

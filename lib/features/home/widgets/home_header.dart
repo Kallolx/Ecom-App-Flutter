@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../search/screens/search_screen.dart';
+import '../../cart/screens/cart_screen.dart';
 
 class HomeHeader extends StatelessWidget {
   final String userName;
@@ -90,7 +91,27 @@ class HomeHeader extends StatelessWidget {
               Stack(
                 children: [
                   IconButton(
-                    onPressed: onCartTap,
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        PageRouteBuilder(
+                          pageBuilder: (context, animation, secondaryAnimation) =>
+                              // ignore: prefer_const_constructors
+                              CartScreen(),
+                          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                            const begin = Offset(0.0, 1.0);
+                            const end = Offset.zero;
+                            const curve = Curves.easeInOutCubic;
+                            var tween = Tween(begin: begin, end: end)
+                                .chain(CurveTween(curve: curve));
+                            return SlideTransition(
+                              position: animation.drive(tween),
+                              child: child,
+                            );
+                          },
+                          transitionDuration: const Duration(milliseconds: 300),
+                        ),
+                      );
+                    },
                     icon: const Icon(Icons.shopping_cart_outlined, size: 28),
                   ),
                   if (cartItemCount > 0)

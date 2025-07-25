@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../widgets/wishlist_item_card.dart';
+import '../../cart/screens/cart_screen.dart';
 
 class WishlistScreen extends StatelessWidget {
   const WishlistScreen({super.key});
@@ -20,7 +21,26 @@ class WishlistScreen extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.shopping_cart_outlined),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                PageRouteBuilder(
+                  pageBuilder: (context, animation, secondaryAnimation) =>
+                      CartScreen(),
+                  transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                    const begin = Offset(0.0, 1.0);
+                    const end = Offset.zero;
+                    const curve = Curves.easeInOutCubic;
+                    var tween = Tween(begin: begin, end: end)
+                        .chain(CurveTween(curve: curve));
+                    return SlideTransition(
+                      position: animation.drive(tween),
+                      child: child,
+                    );
+                  },
+                  transitionDuration: const Duration(milliseconds: 300),
+                ),
+              );
+            },
           ),
         ],
       ),

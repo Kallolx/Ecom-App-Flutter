@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/category_card.dart';
+import 'category_detail_screen.dart'; 
 
 class CategoryTab extends StatelessWidget {
   const CategoryTab({super.key});
@@ -64,7 +65,12 @@ class CategoryTab extends StatelessWidget {
             imageUrl: category['image']!,
             isReversed: index % 2 == 1,
             onTap: () {
-              debugPrint('Category tapped: ${category['name']}');
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => CategoryDetailScreen(categoryName: category['name']!),
+                ),
+              );
             },
           );
         },

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../widgets/order_card.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../search/screens/search_screen.dart';
+import '../../cart/screens/cart_screen.dart';
 
 class OrdersScreen extends StatefulWidget {
   const OrdersScreen({super.key});
@@ -41,13 +43,48 @@ class _OrdersScreenState extends State<OrdersScreen> with SingleTickerProviderSt
           IconButton(
             icon: const Icon(Icons.search),
             onPressed: () {
-              // Navigate to search page
+              Navigator.of(context).push(
+                PageRouteBuilder(
+                  pageBuilder: (context, animation, secondaryAnimation) =>
+                      const SearchScreen(),
+                  transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                    const begin = Offset(0.0, 1.0);
+                    const end = Offset.zero;
+                    const curve = Curves.easeInOutCubic;
+                    var tween = Tween(begin: begin, end: end)
+                        .chain(CurveTween(curve: curve));
+                    return SlideTransition(
+                      position: animation.drive(tween),
+                      child: child,
+                    );
+                  },
+                  transitionDuration: const Duration(milliseconds: 300),
+                ),
+              );
             },
           ),
           IconButton(
             icon: const Icon(Icons.shopping_cart_outlined),
             onPressed: () {
-              // Navigate to cart page
+              Navigator.of(context).push(
+                PageRouteBuilder(
+                  pageBuilder: (context, animation, secondaryAnimation) =>
+                      // ignore: prefer_const_constructors
+                      CartScreen(),
+                  transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                    const begin = Offset(0.0, 1.0);
+                    const end = Offset.zero;
+                    const curve = Curves.easeInOutCubic;
+                    var tween = Tween(begin: begin, end: end)
+                        .chain(CurveTween(curve: curve));
+                    return SlideTransition(
+                      position: animation.drive(tween),
+                      child: child,
+                    );
+                  },
+                  transitionDuration: const Duration(milliseconds: 300),
+                ),
+              );
             },
           ),
         ],

@@ -70,7 +70,7 @@ class _HomeTabState extends State<HomeTab> with SingleTickerProviderStateMixin {
           children: [
             // Header with user info and cart
             HomeHeader(
-              userName: 'User',
+              userName: 'Webbyte',
               userImage: 'assets/images/user.png',
               subtitle: "let's go shopping",
               cartItemCount: 2,
