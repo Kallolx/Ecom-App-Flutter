@@ -17,6 +17,13 @@ class AppRoutes {
   static const String orderDetail = '/order-detail';
   static const String orderTracking = '/order-tracking';
   static const String cartScreen = '/cart-screen';
+  static const String profileScreen = '/profile-screen';
+
+  // Vendor Routes
+  static const String vendorHome = '/vendor-home';
+  static const String vendorInventory = '/vendor-inventory';
+  static const String vendorOrders = '/vendor-orders';
+  static const String vendorProfile = '/vendor-profile';
 }
 
 class AssetPaths {

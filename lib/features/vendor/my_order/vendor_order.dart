@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../widgets/order_card.dart';
+import 'widget/order_card.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../search/screens/search_screen.dart';
 import '../../cart/screens/cart_screen.dart';
 
-class OrdersScreen extends StatefulWidget {
-  const OrdersScreen({super.key});
+class VendorOrdersScreen extends StatefulWidget {
+  const VendorOrdersScreen({super.key});
 
   @override
-  State<OrdersScreen> createState() => _OrdersScreenState();
+  State<VendorOrdersScreen> createState() => _VendorOrdersScreenState();
 }
 
-class _OrdersScreenState extends State<OrdersScreen> with SingleTickerProviderStateMixin {
+class _VendorOrdersScreenState extends State<VendorOrdersScreen> with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override

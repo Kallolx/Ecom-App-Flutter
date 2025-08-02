@@ -79,7 +79,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               ),
               const SizedBox(height: 32),
               Text(
-                'Please enter your email address. You will receive a verification code to create a new password.',
+                'Please enter your Phone Number. You will receive a verification code to create a new password.',
                 style: GoogleFonts.poppins(
                   fontSize: 16,
                   color: AppTheme.darkGrayColor,
@@ -87,7 +87,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               ),
               const SizedBox(height: 32),
               const Text(
-                'Email',
+                'Phone',
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 16,
@@ -96,9 +96,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               const SizedBox(height: 8),
               TextField(
                 controller: _emailController,
-                keyboardType: TextInputType.emailAddress,
+                keyboardType: TextInputType.phone,
                 decoration: const InputDecoration(
-                  hintText: 'Enter your Email',
+                  hintText: 'Enter your mobile number',
                 ),
               ),
               const SizedBox(height: 32),

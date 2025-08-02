@@ -60,7 +60,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
-                      'Email\nVerification',
+                      'Verification',
                       style: Theme.of(context).textTheme.displayLarge,
                     ),
                   ),
@@ -68,7 +68,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
               ),
               const SizedBox(height: 32),
               Text(
-                'Enter the 6-digit verification code sent to your email address',
+                'Enter the 6-digit verification code sent to your system',
                 style: GoogleFonts.poppins(
                   fontSize: 16,
                   color: AppTheme.darkGrayColor,
@@ -88,7 +88,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                 children: List.generate(
                   6,
                   (index) => SizedBox(
-                    width: 45,
+                    width: 50,
                     child: TextField(
                       controller: _controllers[index],
                       focusNode: _focusNodes[index],

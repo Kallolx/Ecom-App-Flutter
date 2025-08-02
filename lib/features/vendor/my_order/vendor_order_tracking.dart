@@ -109,8 +109,55 @@ class OrderTrackingScreen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                           child: Column(
                             children: [
-                              // Packed at (in progress, dashed)
-                              // Packed at (complete, solid line to next)
+                              // Order Confirmation (first step)
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Column(
+                                    children: [
+                                      Container(
+                                        width: 28,
+                                        height: 28,
+                                        decoration: BoxDecoration(
+                                          color: AppTheme.primaryColor,
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: const Icon(Icons.check_circle, color: Colors.white, size: 16),
+                                      ),
+                                      Container(
+                                        width: 2,
+                                        height: 38,
+                                        color: AppTheme.primaryColor,
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(width: 12),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text('Order Confirmation', style: GoogleFonts.poppins(fontWeight: FontWeight.w500, color: AppTheme.textColor, fontSize: 13)),
+                                        const SizedBox(height: 4),
+                                        Row(
+                                          children: [
+                                            Text('Shop', style: GoogleFonts.poppins(fontSize: 11, color: AppTheme.darkGrayColor)),
+                                            const SizedBox(width: 6),
+                                            Text('•', style: GoogleFonts.poppins(fontSize: 11, color: AppTheme.darkGrayColor)),
+                                            const SizedBox(width: 6),
+                                            Text('02:55 pm', style: GoogleFonts.poppins(fontSize: 11, color: AppTheme.darkGrayColor)),
+                                            const SizedBox(width: 6),
+                                            Text('•', style: GoogleFonts.poppins(fontSize: 11, color: AppTheme.darkGrayColor)),
+                                            const SizedBox(width: 6),
+                                            Text('29 Jun, 2025', style: GoogleFonts.poppins(fontSize: 11, color: AppTheme.darkGrayColor)),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 2),
+                              // Packed at (second step)
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -165,7 +212,7 @@ class OrderTrackingScreen extends StatelessWidget {
                                 ],
                               ),
                               const SizedBox(height: 2),
-                              // On the way (in progress, dashed line to next)
+                              // On the way (third step)
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -214,7 +261,7 @@ class OrderTrackingScreen extends StatelessWidget {
                                 ],
                               ),
                               const SizedBox(height: 2),
-                              // Address (pending, no connector, icon bg light gray, icon primary)
+                              // Address (last step)
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [

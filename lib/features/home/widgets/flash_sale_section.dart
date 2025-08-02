@@ -4,7 +4,7 @@ import '../../../core/theme/app_theme.dart';
 import 'flash_sale_card.dart';
 
 class FlashSaleSection extends StatefulWidget {
-  const FlashSaleSection({Key? key}) : super(key: key);
+  const FlashSaleSection({super.key});
 
   @override
   State<FlashSaleSection> createState() => _FlashSaleSectionState();

@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:laza_ecom/core/constants/app_constants.dart';
 
+// Onboarding and splash screens
+import 'package:laza_ecom/features/onboarding/welcome_screen.dart';
+import 'package:laza_ecom/features/onboarding/onboarding_screen.dart';
+import 'package:laza_ecom/features/splash/splash_screen.dart';
+
 // Auth screens
 import 'package:laza_ecom/features/auth/screens/login_screen.dart';
 import 'package:laza_ecom/features/auth/screens/signup_screen.dart';
@@ -9,14 +14,15 @@ import 'package:laza_ecom/features/auth/screens/email_verification_screen.dart';
 import 'package:laza_ecom/features/auth/screens/forgot_screen.dart';
 import 'package:laza_ecom/features/auth/screens/change_password_screen.dart';
 
-// Onboarding and splash screens
-import 'package:laza_ecom/features/onboarding/welcome_screen.dart';
-import 'package:laza_ecom/features/onboarding/onboarding_screen.dart';
-import 'package:laza_ecom/features/splash/splash_screen.dart';
+// Customer screens
 import 'package:laza_ecom/features/home/home_page.dart';
 import 'package:laza_ecom/features/orders/screens/orders_screen.dart';
 import 'package:laza_ecom/features/wishlist/screens/wishlist_screen.dart';
 import 'package:laza_ecom/features/more/screens/more_screen.dart';
+
+// Vendor screens
+import 'package:laza_ecom/features/vendor/screens/vendor_inventory_screen.dart';
+import 'package:laza_ecom/features/vendor/vendor_home.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -24,33 +30,32 @@ class RouteGenerator {
     final args = settings.arguments;
 
     switch (settings.name) {
+      // Onboarding & Splash Routes
       case AppRoutes.splash:
         return MaterialPageRoute(builder: (_) => const SplashScreen());
       case AppRoutes.welcome:
         return MaterialPageRoute(builder: (_) => const WelcomeScreen());
       case AppRoutes.onboarding:
         return MaterialPageRoute(builder: (_) => const OnboardingScreen());
+
+      // Authentication Routes
       case AppRoutes.login:
         return MaterialPageRoute(builder: (_) => const LoginScreen());
       case AppRoutes.signup:
         return MaterialPageRoute(builder: (_) => const SignupScreen());
       case AppRoutes.vendorSignup:
         return MaterialPageRoute(builder: (_) => const VendorSignupScreen());
-
       case AppRoutes.forgotPassword:
         return MaterialPageRoute(
           builder: (context) => const ForgotPasswordScreen(),
         );
-
-        case AppRoutes.changePassword:
-        if (args is String) {
+      case AppRoutes.changePassword:
+        if (args is Map && args['email'] != null) {
           return MaterialPageRoute(
-            builder: (context) => ChangePasswordScreen(email: args),
+            builder: (context) => ChangePasswordScreen(email: args['email']),
           );
         }
         return _errorRoute();
-
-
       case AppRoutes.otpVerification:
         if (args is Map<String, dynamic>) {
           return MaterialPageRoute(
@@ -63,6 +68,7 @@ class RouteGenerator {
         }
         return _errorRoute();
       
+      // Customer Routes
       case AppRoutes.home:
         return MaterialPageRoute(builder: (_) => const HomePage());
       case AppRoutes.orders:
@@ -71,6 +77,12 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const WishlistScreen());
       case AppRoutes.more:
         return MaterialPageRoute(builder: (_) => const MoreScreen());
+
+      // Vendor Routes
+      case AppRoutes.vendorHome:
+        return MaterialPageRoute(builder: (_) => const VendorHome());
+      case AppRoutes.vendorInventory:
+        return MaterialPageRoute(builder: (_) => const VendorInventoryScreen());
       // Add other routes as needed
       default:
         // If there is no such named route in the switch statement

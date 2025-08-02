@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/banner_item.dart';
 import '../../../core/widgets/custom_banner_slider.dart';
@@ -19,8 +17,64 @@ class HomeTab extends StatefulWidget {
 
 class _HomeTabState extends State<HomeTab> with SingleTickerProviderStateMixin {
   Map<String, dynamic>? user;
-  List<dynamic> products = [];
-  bool isLoading = true;
+  final List<Map<String, dynamic>> products = [
+    {
+      'title': 'Black Hoodie',
+      'price': 49.99,
+      'description': 'Comfortable and stylish hoodie.',
+      'rating': 4.5,
+      'stock': 120,
+    },
+    {
+      'title': 'Leather Bag',
+      'price': 89.99,
+      'description': 'Premium leather bag for all occasions.',
+      'rating': 4.7,
+      'stock': 80,
+    },
+    {
+      'title': 'Headphone',
+      'price': 29.99,
+      'description': 'Wireless headphones with great sound.',
+      'rating': 4.2,
+      'stock': 200,
+    },
+    {
+      'title': 'Shoes',
+      'price': 59.99,
+      'description': 'Running shoes for everyday use.',
+      'rating': 4.3,
+      'stock': 150,
+    },
+    {
+      'title': 'Red Jacket',
+      'price': 99.99,
+      'description': 'Warm and trendy red jacket.',
+      'rating': 4.8,
+      'stock': 60,
+    },
+    {
+      'title': 'Travel Backpack',
+      'price': 39.99,
+      'description': 'Spacious backpack for travel.',
+      'rating': 4.4,
+      'stock': 110,
+    },
+    {
+      'title': 'Running Shoes',
+      'price': 69.99,
+      'description': 'Lightweight running shoes.',
+      'rating': 4.6,
+      'stock': 90,
+    },
+    {
+      'title': 'Bluetooth Earbuds',
+      'price': 24.99,
+      'description': 'Compact and powerful earbuds.',
+      'rating': 4.1,
+      'stock': 140,
+    },
+  ];
   late TabController _tabController;
 
   // List of local asset image paths for product cards
@@ -31,29 +85,11 @@ class _HomeTabState extends State<HomeTab> with SingleTickerProviderStateMixin {
   ];
 
 
-  Future<void> fetchProducts() async {
-    setState(() {
-      isLoading = true;
-    });
-    final response = await http.get(Uri.parse('https://dummyjson.com/products'));
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      setState(() {
-        products = data['products'];
-        isLoading = false;
-      });
-    } else {
-      setState(() {
-        isLoading = false;
-      });
-    }
-  }
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
-    fetchProducts();
   }
 
   @override
@@ -108,9 +144,6 @@ class _HomeTabState extends State<HomeTab> with SingleTickerProviderStateMixin {
   }
 
   Widget _buildHomeContent() {
-    if (isLoading) {
-      return const Center(child: CircularProgressIndicator());
-    }
     return Container(
       color: const Color(0xFFF5F5F5),
       child: SingleChildScrollView(

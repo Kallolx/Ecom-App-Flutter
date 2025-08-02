@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:laza_ecom/core/theme/app_theme.dart';
 import 'profile_screen.dart';
-import '../../auth/screens/verification_method_screen.dart';
+import '../../../auth/screens/verification_method_screen.dart';
 import 'messages_screen.dart';
 import 'notification_screen.dart';
 import 'refund/refund_returns_screen.dart';
 import 'help_support_screen.dart';
+import 'payment_screen.dart';
 
 class MoreScreen extends StatefulWidget {
   const MoreScreen({super.key});
@@ -130,7 +131,18 @@ class _MoreScreenState extends State<MoreScreen> {
               );
             },
           ),
+
+          _OptionTile(
+            icon: Icons.assignment_return_outlined,
+            label: 'Payment',
+            onTap: () {
+              Navigator.of(
+                context,
+              ).push(MaterialPageRoute(builder: (_) => const PaymentScreen()));
+            },
+          ),
           const SizedBox(height: 24),
+
           // App Preference Section
           Text(
             'App Preference',

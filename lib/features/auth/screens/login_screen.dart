@@ -138,12 +138,44 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 56,
                 child: ElevatedButton(
                   onPressed: () {
-                    // For now, just navigate to home
-                    Navigator.pushNamedAndRemoveUntil(
-                      context,
-                      AppRoutes.home,
-                      (route) => false,
-                    );
+                    final email = _emailController.text.trim();
+                    final password = _passwordController.text;
+
+                    if (email.isEmpty || password.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Please fill in all fields'),
+                          backgroundColor: Colors.red,
+                        ),
+                      );
+                      return;
+                    }
+
+                    // Vendor login
+                    if (email == 'vendor@example.com' && password == '12345678') {
+                      Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        AppRoutes.vendorHome,
+                        (route) => false,
+                      );
+                    }
+                    // Normal user login
+                    else if (email == 'users@example.com' && password == '123456') {
+                      Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        AppRoutes.home,
+                        (route) => false,
+                      );
+                    }
+                    // Invalid credentials
+                    else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Invalid email or password'),
+                          backgroundColor: Colors.red,
+                        ),
+                      );
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppTheme.primaryColor,

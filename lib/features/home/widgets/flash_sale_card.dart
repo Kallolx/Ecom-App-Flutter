@@ -7,11 +7,11 @@ class FlashSaleCard extends StatelessWidget {
   final double originalPrice;
 
   const FlashSaleCard({
-    Key? key,
+    super.key,
     required this.imageUrl,
     required this.price,
     required this.originalPrice,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
