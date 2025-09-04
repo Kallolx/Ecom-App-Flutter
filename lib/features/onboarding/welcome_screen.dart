@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:laza_ecom/core/constants/app_constants.dart';
 import 'package:laza_ecom/core/theme/app_theme.dart';
@@ -13,10 +15,15 @@ class WelcomeScreen extends StatelessWidget {
         children: [
           // Full screen background image
           Container(
-            decoration: const BoxDecoration(
+            width: double.infinity,
+            height: double.infinity,
+            decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/onboarding_1.jpg'),
+                image: AssetImage('assets/images/welcome.png'),
                 fit: BoxFit.cover,
+                onError: (exception, stackTrace) {
+                  print('DecorationImage error: $exception');
+                },
               ),
             ),
           ),
@@ -28,8 +35,8 @@ class WelcomeScreen extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Colors.black.withOpacity(0.3),
-                  Colors.black.withOpacity(0.6),
+                  Colors.black.withValues(alpha: 0.3),
+                  Colors.black.withValues(alpha: 0.6),
                 ],
               ),
             ),
@@ -49,26 +56,18 @@ class WelcomeScreen extends StatelessWidget {
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       color: Colors.white,
                       fontWeight: FontWeight.w700,
-                      height: 1.5,
+                      height: 1,
                       fontSize: 38, // Increased font size
                     ),
                   ),
                   const SizedBox(height: 8),
-                  Text(
-                    'Find it here, buy it now!',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: Colors.white.withOpacity(0.7),
-                      fontSize: 16,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
                   const SizedBox(height: 52),
                   // Get Started button
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.pushReplacementNamed(context, AppRoutes.onboarding);
+                        Navigator.pushReplacementNamed(context, AppRoutes.login);
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppTheme.primaryColor,
@@ -80,7 +79,7 @@ class WelcomeScreen extends StatelessWidget {
                         elevation: 0,
                       ),
                       child: Text(
-                        'Get Started',
+                        'Login',
                         style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           color: Colors.white,
                           fontWeight: FontWeight.w600,

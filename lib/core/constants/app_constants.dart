@@ -1,7 +1,6 @@
 class AppRoutes {
   static const String splash = '/splash';
   static const String welcome = '/welcome';
-  static const String onboarding = '/onboarding';
   static const String login = '/login';
   static const String signup = '/signup';
   static const String vendorSignup = '/vendor-signup';
@@ -12,6 +11,7 @@ class AppRoutes {
   static const String orders = '/orders';
   static const String wishlist = '/wishlist';
   static const String more = '/more'; 
+  static const String categories = '/categories';
   static const String categoryDetail = '/category-detail';
   static const String shopDetail = '/shop-detail';
   static const String orderDetail = '/order-detail';
@@ -33,7 +33,6 @@ class AssetPaths {
 }
 
 class AppConstants {
-  static const String appName = 'Laza';
-  static const String onboardingKey = 'onboarding_completed';
+  static const String appName = 'Xamarwayne';
   static const String userLoggedInKey = 'user_logged_in';
 }

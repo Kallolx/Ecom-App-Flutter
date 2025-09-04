@@ -16,8 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     // Navigate to the next screen after a delay
     Timer(const Duration(seconds: 2), () {
-      // Check if onboarding was completed before
-      // For now, always navigate to welcome screen
+      // Navigate directly to welcome screen
       Navigator.pushReplacementNamed(context, AppRoutes.welcome);
     });
   }

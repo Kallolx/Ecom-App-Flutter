@@ -139,43 +139,24 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: ElevatedButton(
                   onPressed: () {
                     final email = _emailController.text.trim();
-                    final password = _passwordController.text;
+                    final password = _passwordController.text.trim();
 
-                    if (email.isEmpty || password.isEmpty) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Please fill in all fields'),
-                          backgroundColor: Colors.red,
-                        ),
-                      );
-                      return;
-                    }
-
-                    // Vendor login
-                    if (email == 'vendor@example.com' && password == '12345678') {
+                    // Vendor login: vendor@example.com / 123456
+                    if (email == 'vendor@example.com' && password == '123456') {
                       Navigator.pushNamedAndRemoveUntil(
                         context,
                         AppRoutes.vendorHome,
                         (route) => false,
                       );
+                      return;
                     }
-                    // Normal user login
-                    else if (email == 'users@example.com' && password == '123456') {
-                      Navigator.pushNamedAndRemoveUntil(
-                        context,
-                        AppRoutes.home,
-                        (route) => false,
-                      );
-                    }
-                    // Invalid credentials
-                    else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Invalid email or password'),
-                          backgroundColor: Colors.red,
-                        ),
-                      );
-                    }
+
+                    // Default user navigation to home
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      AppRoutes.home,
+                      (route) => false,
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppTheme.primaryColor,

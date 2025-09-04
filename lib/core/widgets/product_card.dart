@@ -125,9 +125,10 @@ class ProductCard extends StatelessWidget {
 
             // Content
             Expanded(
-              child: Padding(
+                child: Padding(
                 padding: const EdgeInsets.all(10),
                 child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
@@ -158,7 +159,7 @@ class ProductCard extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 8),
                     Row(
                       children: [
                         const Icon(Icons.star, color: Colors.amber, size: 14),

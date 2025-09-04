@@ -76,7 +76,10 @@ class _BannerSliderState extends State<BannerSlider> {
             },
             itemCount: widget.items.length,
             itemBuilder: (context, index) {
-              return widget.items[index];
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: widget.items[index],
+              );
             },
           ),
         ),

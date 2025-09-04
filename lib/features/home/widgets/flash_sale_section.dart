@@ -63,18 +63,21 @@ class _FlashSaleSectionState extends State<FlashSaleSection> {
               Row(
                 children: [
                   const Text(
-                    'Flash Sale ⚡',
+                    'Flash Sale',
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 16,
                       fontWeight: FontWeight.bold,
+                      color: Colors.black,
                     ),
                   ),
                   const SizedBox(width: 12),
                   // Timer display
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
                     decoration: BoxDecoration(
-                      color: AppTheme.primaryColor.withOpacity(0.1),
                       borderRadius: BorderRadius.circular(4),
                     ),
                     child: Row(
@@ -91,9 +94,27 @@ class _FlashSaleSectionState extends State<FlashSaleSection> {
               ),
               TextButton(
                 onPressed: () {
-                  // Handle see all flash sales
+                  // Handle shop more flash sales
                 },
-                child: const Text('See All'),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text(
+                      'Shop More',
+                      style: TextStyle(
+                        color: AppTheme.primaryColor,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 12,
+                      ),
+                    ),
+                    const SizedBox(width: 4),
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      size: 8,
+                      color: AppTheme.primaryColor,
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
@@ -101,25 +122,28 @@ class _FlashSaleSectionState extends State<FlashSaleSection> {
         const SizedBox(height: 12),
         // Flash sale products
         SizedBox(
-          height: 180,
+          height: 160,
           child: ListView(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            children: const [
+            children: [
               FlashSaleCard(
-                imageUrl: 'https://plus.unsplash.com/premium_photo-1664392147011-2a720f214e01?q=80&w=878&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-                price: 10.89,
-                originalPrice: 13.78,
+                imageUrl: 'assets/products/prod1.jpg',
+                price: 98,
+                discountPercentage: 35,
+                statusText: 'Only 1 left',
               ),
               FlashSaleCard(
-                imageUrl: 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-                price: 10.89,
-                originalPrice: 13.78,
+                imageUrl: 'assets/products/prod2.jpg',
+                price: 279,
+                discountPercentage: 53,
+                statusText: '107 Sold',
               ),
               FlashSaleCard(
-                imageUrl: 'https://images.unsplash.com/photo-1615397349754-cfa2066a298e?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-                price: 10.89,
-                originalPrice: 13.78,
+                imageUrl: 'assets/products/prod3.jpg',
+                price: 232,
+                discountPercentage: 61,
+                statusText: 'Only 5 left',
               ),
             ],
           ),

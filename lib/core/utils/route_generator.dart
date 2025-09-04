@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:laza_ecom/core/constants/app_constants.dart';
 
-// Onboarding and splash screens
+// Welcome and splash screens
 import 'package:laza_ecom/features/onboarding/welcome_screen.dart';
-import 'package:laza_ecom/features/onboarding/onboarding_screen.dart';
 import 'package:laza_ecom/features/splash/splash_screen.dart';
 
 // Auth screens
@@ -19,6 +18,7 @@ import 'package:laza_ecom/features/home/home_page.dart';
 import 'package:laza_ecom/features/orders/screens/orders_screen.dart';
 import 'package:laza_ecom/features/wishlist/screens/wishlist_screen.dart';
 import 'package:laza_ecom/features/more/screens/more_screen.dart';
+import 'package:laza_ecom/features/category/screens/categories_page.dart';
 
 // Vendor screens
 import 'package:laza_ecom/features/vendor/screens/vendor_inventory_screen.dart';
@@ -30,13 +30,11 @@ class RouteGenerator {
     final args = settings.arguments;
 
     switch (settings.name) {
-      // Onboarding & Splash Routes
+      // Welcome & Splash Routes
       case AppRoutes.splash:
         return MaterialPageRoute(builder: (_) => const SplashScreen());
       case AppRoutes.welcome:
         return MaterialPageRoute(builder: (_) => const WelcomeScreen());
-      case AppRoutes.onboarding:
-        return MaterialPageRoute(builder: (_) => const OnboardingScreen());
 
       // Authentication Routes
       case AppRoutes.login:
@@ -77,6 +75,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const WishlistScreen());
       case AppRoutes.more:
         return MaterialPageRoute(builder: (_) => const MoreScreen());
+      case AppRoutes.categories:
+        return MaterialPageRoute(builder: (_) => const CategoriesPage());
 
       // Vendor Routes
       case AppRoutes.vendorHome:

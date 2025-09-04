@@ -22,6 +22,11 @@ class BannerItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Check if there's any content to display
+    final hasContent = (title?.isNotEmpty == true) || 
+                      (subtitle?.isNotEmpty == true) || 
+                      (buttonText?.isNotEmpty == true);
+
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
@@ -30,7 +35,7 @@ class BannerItem extends StatelessWidget {
           fit: BoxFit.cover,
         ),
       ),
-      child: Container(
+      child: hasContent ? Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           gradient: LinearGradient(
@@ -48,7 +53,7 @@ class BannerItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (title != null) ...[
+            if (title?.isNotEmpty == true) ...[
               Text(
                 title!,
                 style: GoogleFonts.poppins(
@@ -59,7 +64,7 @@ class BannerItem extends StatelessWidget {
               ),
               const SizedBox(height: 8),
             ],
-            if (subtitle != null) ...[
+            if (subtitle?.isNotEmpty == true) ...[
               Text(
                 subtitle!,
                 style: GoogleFonts.poppins(
@@ -69,7 +74,7 @@ class BannerItem extends StatelessWidget {
               ),
               const SizedBox(height: 8),
             ],
-            if (buttonText != null)
+            if (buttonText?.isNotEmpty == true)
               SizedBox(
                 width: 120, // Fixed width for smaller button
                 height: 40, // Fixed height
@@ -94,7 +99,7 @@ class BannerItem extends StatelessWidget {
               ),
           ],
         ),
-      ),
+      ) : null, // No overlay when no content
     );
   }
 }

@@ -36,10 +36,6 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> with SingleTickerPr
           children: [
             // Header
             HomeHeader(
-              userName: 'Webbyte',
-              userImage: 'assets/images/user.png',
-              subtitle: 'Metal T-Shirt Store',
-              cartItemCount: 0,
               onSearchTap: () {},
             ),
 

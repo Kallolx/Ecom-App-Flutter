@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import '../../../core/theme/app_theme.dart';
+import '../../../core/constants/app_constants.dart';
 import '../../../core/widgets/banner_item.dart';
 import '../../../core/widgets/custom_banner_slider.dart';
 import '../../../core/widgets/product_card.dart';
 import '../widgets/home_header.dart';
 import '../widgets/section_header.dart';
 import '../widgets/flash_sale_section.dart';
-import 'category_tab.dart';
+import '../widgets/voucher_section.dart';
+import '../widgets/sliding_tab_bar.dart';
 
 class HomeTab extends StatefulWidget {
   const HomeTab({super.key});
@@ -15,8 +16,23 @@ class HomeTab extends StatefulWidget {
   State<HomeTab> createState() => _HomeTabState();
 }
 
-class _HomeTabState extends State<HomeTab> with SingleTickerProviderStateMixin {
-  Map<String, dynamic>? user;
+class _HomeTabState extends State<HomeTab> {
+  int _selectedTabIndex = 0;
+
+  // Tab data with icons and names
+  final List<Map<String, dynamic>> productTabs = [
+    {'name': 'For You', 'icon': Icons.favorite},
+    {'name': 'Hot Deals', 'icon': Icons.local_fire_department},
+    {'name': 'Voucher Max', 'icon': Icons.card_giftcard},
+    {'name': 'Daraz LooK', 'icon': Icons.person},
+    {'name': 'Electronics', 'icon': Icons.devices},
+    {'name': 'Fashion', 'icon': Icons.checkroom},
+    {'name': 'Home & Living', 'icon': Icons.home},
+    {'name': 'Sports', 'icon': Icons.sports_soccer},
+    {'name': 'Beauty', 'icon': Icons.face_retouching_natural},
+    {'name': 'Books', 'icon': Icons.menu_book},
+  ];
+
   final List<Map<String, dynamic>> products = [
     {
       'title': 'Black Hoodie',
@@ -75,28 +91,37 @@ class _HomeTabState extends State<HomeTab> with SingleTickerProviderStateMixin {
       'stock': 140,
     },
   ];
-  late TabController _tabController;
 
   // List of local asset image paths for product cards
   final List<String> productImages = [
     'assets/products/prod1.jpg',
     'assets/products/prod2.jpg',
-    'assets/products/prod3.jpg'
+    'assets/products/prod3.jpg',
   ];
 
+  // Top (compact) category tabs data
+  final List<Map<String, dynamic>> topCategoryTabs = [
+    {'image': 'assets/products/1.png', 'name': 'Win Gifts!'},
+    {'image': 'assets/products/2.png', 'name': 'Buy any 4'},
+    {'image': 'assets/products/3.png', 'name': 'Free delivery'},
+    {'image': 'assets/products/4.png', 'name': 'DarazLook'},
+    {'image': 'assets/products/5.png', 'name': 'Buy more Save More'},
+    {'image': 'assets/products/6.png', 'name': 'Beauty'},
+    {'image': 'assets/products/7.png', 'name': 'New Arrivals'},
+    {'image': 'assets/products/8.png', 'name': 'Affiliates Program'},
+    {'image': 'assets/products/9.png', 'name': 'Play & Win'},
+  ];
 
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 2, vsync: this);
-  }
-
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
-  }
+  // Bottom (larger) category tabs with different display names
+  final List<Map<String, dynamic>> bottomCategoryTabs = [
+    {'image': 'assets/products/c1.png', 'name': 'Gaming Headsets'},
+    {'image': 'assets/products/c2.png', 'name': 'In-Ear headphones'},
+    {'image': 'assets/products/c3.png', 'name': 'Creakers'},
+    {'image': 'assets/products/c4.png', 'name': 'Refrigerators'},
+    {'image': 'assets/products/c5.png', 'name': 'Heater'},
+    {'image': 'assets/products/c6.png', 'name': 'Kitchen Fittings'},
+    {'image': 'assets/products/c7.png', 'name': 'Women\'s Fashion'},
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -104,39 +129,11 @@ class _HomeTabState extends State<HomeTab> with SingleTickerProviderStateMixin {
       body: SafeArea(
         child: Column(
           children: [
-            // Header with user info and cart
-            HomeHeader(
-              userName: 'Webbyte',
-              userImage: 'assets/images/user.png',
-              subtitle: "let's go shopping",
-              cartItemCount: 2,
-            ),
+            // Header with search bar and icons
+            const HomeHeader(),
 
-            // Tab bar for Home and Category
-            TabBar(
-              controller: _tabController,
-              labelColor: AppTheme.primaryColor,
-              unselectedLabelColor: AppTheme.darkGrayColor,
-              indicatorColor: AppTheme.primaryColor,
-              tabs: const [
-                Tab(text: 'Home'),
-                Tab(text: 'Category'),
-              ],
-            ),
-
-            // Tab content
-            Expanded(
-              child: TabBarView(
-                controller: _tabController,
-                children: [
-                  // Home tab content
-                  _buildHomeContent(),
-
-                  // Category tab content
-                  const CategoryTab(),
-                ],
-              ),
-            ),
+            // Home content directly without tabs
+            Expanded(child: _buildHomeContent()),
           ],
         ),
       ),
@@ -145,39 +142,215 @@ class _HomeTabState extends State<HomeTab> with SingleTickerProviderStateMixin {
 
   Widget _buildHomeContent() {
     return Container(
-      color: const Color(0xFFF5F5F5),
+      color: Colors.white,
       child: SingleChildScrollView(
         child: Column(
           children: [
             const SizedBox(height: 16),
-            // Top banner slider
+            // Top banner slider - reduced height and multiple images
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 14),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(12),
                 child: BannerSlider(
-                  height: 160,
+                  height: 120,
+                  showIndicator: false, // hide dot slider indicators per request
                   items: [
-                    BannerItem(
-                      imageUrl: 'assets/images/banner1.jpg',
-                      title: 'On Headphones',
-                      subtitle: 'Exclusive Sales',
-                      buttonText: 'Shop Now',
-                      onButtonPressed: () {},
-                    ),
+                    BannerItem(imageUrl: 'assets/images/banner1.png'),
+                    BannerItem(imageUrl: 'assets/images/banner2.png'),
+                    BannerItem(imageUrl: 'assets/images/banner3.png'),
                   ],
                 ),
               ),
             ),
-            const SizedBox(height: 16),
+
+            const SizedBox(height: 10),
+
+            // Horizontally scrollable category tabs (more compact - TOP)
+            SizedBox(
+              height: 76, // top compact slider height
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                itemCount: topCategoryTabs.length,
+                itemBuilder: (context, index) {
+                  final category = topCategoryTabs[index];
+                  return Container(
+                    width: 64, // Tighter width for top
+                    height: 76, // match slider height so items align
+                    margin: const EdgeInsets.only(right: 4), // tightened gap between tabs
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start, // keep image fixed at top
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        // Image container with reduced rounded corners
+                        SizedBox(
+                          width: 44,
+                          height: 44,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(6),
+                            child: Image.asset(
+                              category['image'],
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) {
+                                return Container(
+                                  color: Colors.grey.shade300,
+                                  child: const Icon(
+                                    Icons.image_not_supported,
+                                    color: Colors.grey,
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                        // Category name (pushes down, not image)
+                        Flexible(
+                          child: Text(
+                            category['name'],
+                            style: const TextStyle(
+                              fontSize: 10, // Slightly smaller font
+                              fontWeight: FontWeight.w500,
+                              color: Colors.black87,
+                            ),
+                            textAlign: TextAlign.center,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
+
+            const SizedBox(height: 10),
+
+            // Voucher Section
+            const VoucherSection(),
+
+            const SizedBox(height: 10),
+
+            // Single GIF Banner Section
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(6),
+                child: SizedBox(
+                  height: 70,
+                  width: double.infinity,
+                  child: Image.asset(
+                    'assets/images/banner.gif.webp',
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Container(
+                        color: Colors.grey.shade300,
+                        child: const Icon(
+                          Icons.image_not_supported,
+                          size: 50,
+                          color: Colors.grey,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 10),
+
             // Flash Sale Section
             const FlashSaleSection(),
-            const SizedBox(height: 24),
+
+            // Categories Section
             SectionHeader(
-              title: 'Trending Now',
-              onSeeAllPressed: () {},
+              title: 'Categories',
+              onSeeAllPressed: () {
+                Navigator.pushNamed(context, AppRoutes.categories);
+              },
             ),
-            // Trending products from API
+
+            // Categories horizontal slider (BOTTOM - larger, distinct from top)
+            SizedBox(
+              height: 110,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                itemCount: bottomCategoryTabs.length,
+                itemBuilder: (context, index) {
+                  final category = bottomCategoryTabs[index];
+                  return Container(
+                    width: 96,
+                    height: 112, // increased height so bottom items are bigger than top
+                    margin: const EdgeInsets.only(right: 10),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          width: 72,
+                          height: 72,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(6),
+                            child: Image.asset(
+                              category['image'],
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) {
+                                return Container(
+                                  color: Colors.grey.shade300,
+                                  child: const Icon(
+                                    Icons.image_not_supported,
+                                    color: Colors.grey,
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Flexible(
+                          child: Text(
+                            category['name'],
+                            style: const TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black87,
+                            ),
+                            textAlign: TextAlign.center,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
+
+            const SizedBox(height: 24),
+
+            // Product tabs with smooth sliding indicator
+            SlidingTabBar(
+              tabs: productTabs,
+              selectedIndex: _selectedTabIndex,
+              onTabSelected: (index) {
+                setState(() {
+                  _selectedTabIndex = index;
+                });
+              },
+            ),
+
+            const SizedBox(height: 16),
+
+            // Product grid for selected tab
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: GridView.builder(
@@ -208,31 +381,8 @@ class _HomeTabState extends State<HomeTab> with SingleTickerProviderStateMixin {
                 },
               ),
             ),
-            const SizedBox(height: 24),
 
-            // Middle banner slider
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(12),
-                child: BannerSlider(
-                  height: 160,
-                  items: [
-                    BannerItem(
-                      imageUrl: 'assets/images/banner2.jpg',
-                      title: '50-40% OFF',
-                      subtitle: 'Now in colours',
-                      buttonText: 'Shop Now',
-                      onButtonPressed: () {
-                        // Handle shop now
-                      },
-                      isDark: true,
-                    ),
-                    // Add more banner items
-                  ],
-                ),
-              ),
-            ),
+            const SizedBox(height: 24),
 
             // New Arrivals section
             SectionHeader(

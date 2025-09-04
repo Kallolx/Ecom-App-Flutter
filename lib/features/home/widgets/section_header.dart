@@ -6,11 +6,7 @@ class SectionHeader extends StatelessWidget {
   final String title;
   final VoidCallback? onSeeAllPressed;
 
-  const SectionHeader({
-    super.key,
-    required this.title,
-    this.onSeeAllPressed,
-  });
+  const SectionHeader({super.key, required this.title, this.onSeeAllPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -22,19 +18,30 @@ class SectionHeader extends StatelessWidget {
           Text(
             title,
             style: GoogleFonts.poppins(
-              fontSize: 20,
+              fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
           ),
           TextButton(
             onPressed: onSeeAllPressed,
-            child: Text(
-              'See All',
-              style: GoogleFonts.poppins(
-                color: AppTheme.primaryColor,
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
-              ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'Shop More',
+                  style: TextStyle(
+                    color: AppTheme.primaryColor,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 12,
+                  ),
+                ),
+                const SizedBox(width: 4),
+                Icon(
+                  Icons.arrow_forward_ios,
+                  size: 8,
+                  color: AppTheme.primaryColor,
+                ),
+              ],
             ),
           ),
         ],
