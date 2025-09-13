@@ -10,6 +10,51 @@ class CategoriesPage extends StatefulWidget {
 class _CategoriesPageState extends State<CategoriesPage> {
   int _selectedCategoryIndex = 0;
   final Map<String, bool> _expandedSubCategories = {};
+  
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _handleNavigationArguments();
+    });
+  }
+  
+  void _handleNavigationArguments() {
+    final args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+    if (args != null) {
+      final selectedCategoryIndex = args['selectedCategoryIndex'] as int?;
+      final selectedSubcategoryName = args['selectedSubcategoryName'] as String?;
+      
+      if (selectedCategoryIndex != null) {
+        setState(() {
+          _selectedCategoryIndex = selectedCategoryIndex;
+        });
+        
+        // If subcategory name is provided, find and expand it
+        if (selectedSubcategoryName != null && _selectedCategoryIndex != 0) {
+          _expandTargetSubcategory(selectedSubcategoryName);
+        }
+      }
+    }
+  }
+  
+  void _expandTargetSubcategory(String targetSubcategoryName) {
+    final currentSubCategories = subCategories[_selectedCategoryIndex];
+    
+    for (int index = 0; index < currentSubCategories.length; index++) {
+      final subCategory = currentSubCategories[index];
+      final categoryKey = '${_selectedCategoryIndex}_$index';
+      
+      // Check if this subcategory matches the target name
+      if (subCategory['name'].toString().toLowerCase().contains(targetSubcategoryName.toLowerCase()) ||
+          targetSubcategoryName.toLowerCase().contains(subCategory['name'].toString().toLowerCase())) {
+        setState(() {
+          _expandedSubCategories[categoryKey] = true;
+        });
+        break;
+      }
+    }
+  }
 
   // Main categories data
   final List<Map<String, dynamic>> mainCategories = [

@@ -19,6 +19,9 @@ import 'package:laza_ecom/features/orders/screens/orders_screen.dart';
 import 'package:laza_ecom/features/wishlist/screens/wishlist_screen.dart';
 import 'package:laza_ecom/features/more/screens/more_screen.dart';
 import 'package:laza_ecom/features/category/screens/categories_page.dart';
+import 'package:laza_ecom/features/category/screens/category_detail_screen.dart';
+// Food-specific details screen
+import 'package:laza_ecom/features/home/screens/food_details.dart';
 
 // Vendor screens
 import 'package:laza_ecom/features/vendor/screens/vendor_inventory_screen.dart';
@@ -77,6 +80,22 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const MoreScreen());
       case AppRoutes.categories:
         return MaterialPageRoute(builder: (_) => const CategoriesPage());
+      case AppRoutes.categoryDetail:
+        if (args is Map<String, dynamic>) {
+          // If the tapped category is Food, route to the food-specific screen
+          final name = args['name'] as String?;
+          if (name != null && name.toLowerCase() == 'food') {
+            return MaterialPageRoute(
+              builder: (_) => FoodDetailScreen(categoryName: name),
+            );
+          }
+
+          // Otherwise use the generic category detail screen
+          return MaterialPageRoute(
+            builder: (_) => CategoryDetailScreen(category: args),
+          );
+        }
+        return _errorRoute();
 
       // Vendor Routes
       case AppRoutes.vendorHome:

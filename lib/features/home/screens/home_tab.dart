@@ -101,15 +101,12 @@ class _HomeTabState extends State<HomeTab> {
 
   // Top (compact) category tabs data
   final List<Map<String, dynamic>> topCategoryTabs = [
-    {'image': 'assets/products/1.png', 'name': 'Win Gifts!'},
-    {'image': 'assets/products/2.png', 'name': 'Buy any 4'},
-    {'image': 'assets/products/3.png', 'name': 'Free delivery'},
-    {'image': 'assets/products/4.png', 'name': 'DarazLook'},
-    {'image': 'assets/products/5.png', 'name': 'Buy more Save More'},
-    {'image': 'assets/products/6.png', 'name': 'Beauty'},
-    {'image': 'assets/products/7.png', 'name': 'New Arrivals'},
-    {'image': 'assets/products/8.png', 'name': 'Affiliates Program'},
-    {'image': 'assets/products/9.png', 'name': 'Play & Win'},
+    {'image': 'assets/products/shop.png', 'name': 'SUUQ'},
+    {'image': 'assets/products/food.png', 'name': 'Food'},
+    {'image': 'assets/products/gas.png', 'name': 'Gas'},
+    {'image': 'assets/products/sm.png', 'name': 'Supermarkets'},
+    {'image': 'assets/products/laundry.png', 'name': 'Laundry'},
+    {'image': 'assets/products/delivery.png', 'name': 'Delivery'},
   ];
 
   // Bottom (larger) category tabs with different display names
@@ -175,52 +172,61 @@ class _HomeTabState extends State<HomeTab> {
                 itemCount: topCategoryTabs.length,
                 itemBuilder: (context, index) {
                   final category = topCategoryTabs[index];
-                  return Container(
-                    width: 64, // Tighter width for top
-                    height: 76, // match slider height so items align
-                    margin: const EdgeInsets.only(right: 4), // tightened gap between tabs
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start, // keep image fixed at top
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        // Image container with reduced rounded corners
-                        SizedBox(
-                          width: 44,
-                          height: 44,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(6),
-                            child: Image.asset(
-                              category['image'],
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Container(
-                                  color: Colors.grey.shade300,
-                                  child: const Icon(
-                                    Icons.image_not_supported,
-                                    color: Colors.grey,
-                                  ),
-                                );
-                              },
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        AppRoutes.categoryDetail,
+                        arguments: category,
+                      );
+                    },
+                    child: Container(
+                      width: 64, // Tighter width for top
+                      height: 76, // match slider height so items align
+                      margin: const EdgeInsets.only(right: 4), // tightened gap between tabs
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start, // keep image fixed at top
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          // Image container with reduced rounded corners
+                          SizedBox(
+                            width: 44,
+                            height: 44,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(6),
+                              child: Image.asset(
+                                category['image'],
+                                fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) {
+                                  return Container(
+                                    color: Colors.grey.shade300,
+                                    child: const Icon(
+                                      Icons.image_not_supported,
+                                      color: Colors.grey,
+                                    ),
+                                  );
+                                },
+                              ),
                             ),
                           ),
-                        ),
-                        const SizedBox(height: 6),
-                        // Category name (pushes down, not image)
-                        Flexible(
-                          child: Text(
-                            category['name'],
-                            style: const TextStyle(
-                              fontSize: 10, // Slightly smaller font
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black87,
+                          const SizedBox(height: 6),
+                          // Category name (pushes down, not image)
+                          Flexible(
+                            child: Text(
+                              category['name'],
+                              style: const TextStyle(
+                                fontSize: 10, // Slightly smaller font
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black87,
+                              ),
+                              textAlign: TextAlign.center,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
                             ),
-                            textAlign: TextAlign.center,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   );
                 },
@@ -282,53 +288,89 @@ class _HomeTabState extends State<HomeTab> {
                 itemCount: bottomCategoryTabs.length,
                 itemBuilder: (context, index) {
                   final category = bottomCategoryTabs[index];
-                  return Container(
-                    width: 96,
-                    height: 112, // increased height so bottom items are bigger than top
-                    margin: const EdgeInsets.only(right: 10),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Container(
-                          width: 72,
-                          height: 72,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(6),
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(6),
-                            child: Image.asset(
-                              category['image'],
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Container(
-                                  color: Colors.grey.shade300,
-                                  child: const Icon(
-                                    Icons.image_not_supported,
-                                    color: Colors.grey,
-                                  ),
-                                );
-                              },
+                  
+                  // Map bottom category to main category and subcategory
+                  Map<String, dynamic> getCategoryMapping(String categoryName) {
+                    switch (categoryName) {
+                      case 'Gaming Headsets':
+                        return {'categoryIndex': 3, 'subcategoryName': 'Gaming Headsets'}; // Electronic Accessories
+                      case 'In-Ear headphones':
+                        return {'categoryIndex': 3, 'subcategoryName': 'In-Ear headphones'}; // Electronic Accessories
+                      case 'Creakers':
+                        return {'categoryIndex': 2, 'subcategoryName': 'Shoes'}; // Men's & Boys' Fashion
+                      case 'Refrigerators':
+                        return {'categoryIndex': 4, 'subcategoryName': 'Refrigerators'}; // TV & Home Appliances
+                      case 'Heater':
+                        return {'categoryIndex': 4, 'subcategoryName': 'Heater'}; // TV & Home Appliances
+                      case 'Kitchen Fittings':
+                        return {'categoryIndex': 9, 'subcategoryName': 'Kitchen Items'}; // Home & Lifestyle
+                      case 'Women\'s Fashion':
+                        return {'categoryIndex': 1, 'subcategoryName': 'Dresses'}; // Women's & Girls' Fashion
+                      default:
+                        return {'categoryIndex': 0, 'subcategoryName': null}; // Just for You
+                    }
+                  }
+
+                  return GestureDetector(
+                    onTap: () {
+                      final mapping = getCategoryMapping(category['name']);
+                      Navigator.pushNamed(
+                        context,
+                        AppRoutes.categories,
+                        arguments: {
+                          'selectedCategoryIndex': mapping['categoryIndex'],
+                          'selectedSubcategoryName': mapping['subcategoryName'],
+                        },
+                      );
+                    },
+                    child: Container(
+                      width: 96,
+                      height: 112, // increased height so bottom items are bigger than top
+                      margin: const EdgeInsets.only(right: 10),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            width: 72,
+                            height: 72,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(6),
+                              child: Image.asset(
+                                category['image'],
+                                fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) {
+                                  return Container(
+                                    color: Colors.grey.shade300,
+                                    child: const Icon(
+                                      Icons.image_not_supported,
+                                      color: Colors.grey,
+                                    ),
+                                  );
+                                },
+                              ),
                             ),
                           ),
-                        ),
-                        const SizedBox(height: 8),
-                        Flexible(
-                          child: Text(
-                            category['name'],
-                            style: const TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black87,
+                          const SizedBox(height: 8),
+                          Flexible(
+                            child: Text(
+                              category['name'],
+                              style: const TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black87,
+                              ),
+                              textAlign: TextAlign.center,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
                             ),
-                            textAlign: TextAlign.center,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   );
                 },

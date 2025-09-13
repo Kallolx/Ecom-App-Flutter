@@ -17,13 +17,13 @@ class _SplashScreenState extends State<SplashScreen> {
     // Navigate to the next screen after a delay
     Timer(const Duration(seconds: 2), () {
       // Navigate directly to welcome screen
-      Navigator.pushReplacementNamed(context, AppRoutes.welcome);
+      Navigator.pushReplacementNamed(context, AppRoutes.home);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(  
       backgroundColor: AppTheme.backgroundColor,
       body: Center(
         child: Column(

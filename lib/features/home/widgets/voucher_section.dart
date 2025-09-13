@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:laza_ecom/core/theme/app_theme.dart';
 
 class VoucherSection extends StatelessWidget {
   const VoucherSection({super.key});
@@ -122,7 +123,7 @@ class VoucherSection extends StatelessWidget {
                   ),
                 ),
                 // Dotted vertical line separator
-                Container(
+                SizedBox(
                   width: 1,
                   height: 40,
                   child: CustomPaint(painter: DottedLinePainter()),
@@ -141,8 +142,8 @@ class VoucherSection extends StatelessWidget {
                       decoration: BoxDecoration(
                         gradient: const LinearGradient(
                           colors: [
-                            Color(0xFFFF9800),
-                            Color(0xFFE91E63),
+                            AppTheme.primaryColor,
+                            AppTheme.successColor,
                           ], // Orange to pink
                           begin: Alignment.centerLeft,
                           end: Alignment.centerRight,
